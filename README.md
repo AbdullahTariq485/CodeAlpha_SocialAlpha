@@ -47,7 +47,7 @@ npm install
 ```
 
 ### 2. Configure Your Environment Keys
-Ensure your local `backend/.env` file contains your secure database cloud pathing routing string and verification signatures:
+Ensure your local `backend/.env` file contains your secure database cloud (like in this case Atlas) pathing routing string and verification signatures  or u can just copy paste this inside your .env file:
 ```dotenv
 PORT=5000
 MONGODB_URI=mongodb+srv://deepfake650_db_user:epOM8EIpGN70bqLv@cluster0.l7khuqd.mongodb.net/socialalpha?retryWrites=true&w=majority
