@@ -60,7 +60,7 @@ Social Alpha is a small social networking app for building a circle, sharing upd
 
 ### Atlas connection notes
 
-Use the connection string shown by your own Atlas project. An Atlas `mongodb+srv://` URI is preferred when your network can resolve SRV DNS records. If SRV lookups are blocked by a local network, use the standard seed-list URI available from Atlas or resolve the network issue. Do not copy another developer's connection string.
+Use the connection string shown by your own Atlas project. An Atlas `mongodb+srv://` URI is preferred when your network can resolve SRV DNS records. If SRV lookups are blocked by a local network, use the standard seed-list URI available from Atlas or resolve the network issue.
 
 ## Using the app
 
@@ -84,18 +84,6 @@ Support requests are stored as tickets in MongoDB. This project does not send su
 
 The sign-in page loads its image, fonts, and icons from Unsplash, Google Fonts, and unpkg. Those services may receive normal connection information when the browser loads the assets.
 
-## Deploying for shared access
-
-For a public app, deploy the backend as a Node.js service and keep the `frontend` directory available beside `backend`, since Express serves it from that directory. Start the service with `npm start`. Set `MONGODB_URI`, `MONGODB_DATABASE`, and a strong `JWT_SECRET` as private environment variables in the hosting provider. Add the backend host's network access to Atlas, preferably using a narrow allowlist supported by that host.
-
-Visitors use the deployed website and do not need MongoDB credentials. The backend connects to Atlas on their behalf. A person who clones this repository and runs it on their own localhost needs their own database connection in their own ignored `backend/.env`; this repository intentionally does not grant clones access to the maintainer's Atlas database.
-
-## Keeping secrets out of GitHub
-
-- Never put an Atlas username, password, full MongoDB URI, or JWT secret in this README, frontend code, or a committed file.
-- `.gitignore` excludes `.env` files, while `backend/.env.example` contains only blank placeholders.
-- Before committing, check that `backend/.env` is not tracked. If a secret was ever committed or shared, rotate it in Atlas and replace it in your local or hosted environment. Removing it from the latest file alone does not erase it from Git history.
-- Do not configure Atlas with unrestricted network access just to avoid setting up the backend correctly.
 
 ## Project layout
 
