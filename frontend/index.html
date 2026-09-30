@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b100d">
+    <title>Social Alpha | Find your people</title>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('sa_theme') === 'light' ? 'light' : 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <main id="auth-screen" class="auth-screen">
+        <section class="auth-story" aria-label="Social Alpha community">
+            <img class="story-image" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=85" alt="Friends sharing a moment outdoors">
+            <div class="story-shade"></div>
+            <button class="icon-button theme-toggle theme-toggle-story" type="button" data-theme-toggle aria-label="Switch to light mode" title="Switch to light mode"><i class="theme-icon theme-icon-sun" data-lucide="sun"></i><i class="theme-icon theme-icon-moon" data-lucide="moon"></i></button>
+            <a class="brand brand-on-image" href="#" aria-label="Social Alpha home">
+                <span class="brand-mark"><i data-lucide="orbit"></i></span>
+                <span>social<span class="brand-light">alpha</span></span>
+            </a>
+            <div class="story-copy">
+                <span class="eyebrow eyebrow-light">THE SOCIAL ALPHA EFFECT</span>
+                <h1>Find your people. Move forward together.</h1>
+                <p>Build a stronger circle, one good conversation at a time.</p>
+                <div class="story-proof"><span class="proof-dot"></span> Make a connection. Start a ripple.</div>
+            </div>
+            <span class="image-credit">A little more signal. A little less noise.</span>
+        </section>
+
+        <section class="auth-panel">
+            <div id="auth-form-wrap" class="auth-form-wrap">
+                <span class="eyebrow">YOUR PEOPLE ARE HERE</span>
+                <h2 id="auth-heading">Welcome back.</h2>
+                <p class="auth-intro" id="auth-description">Pick up where your conversations left off.</p>
+                <div id="auth-switch" class="auth-switch" data-mode="login" role="tablist" aria-label="Account access">
+                    <button class="auth-switch-button is-active" id="login-tab" type="button" role="tab" aria-selected="true">Log in</button>
+                    <button class="auth-switch-button" id="register-tab" type="button" role="tab" aria-selected="false">Create account</button>
+                </div>
+                <form id="auth-form" class="auth-form">
+                    <div id="auth-fields-switcher" class="auth-fields-switcher">
+                        <div id="login-identity" class="auth-identity-panel is-active" data-identity="login" aria-hidden="false">
+                            <label for="auth-identifier">Username or email</label>
+                            <input id="auth-identifier" name="identifier" autocomplete="username" placeholder="username or email" required>
+                        </div>
+                        <div id="register-identity" class="auth-identity-panel" data-identity="register" aria-hidden="true" inert>
+                            <label for="auth-username">Username</label>
+                            <input id="auth-username" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]+" placeholder="e.g. junecreates" required>
+                            <label for="auth-email">Email address</label>
+                            <input id="auth-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <label for="auth-password">Password</label>
+                    <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="At least 8 characters" required>
+                    <p id="auth-error" class="form-message" aria-live="polite"></p>
+                    <button id="auth-submit" class="button button-primary button-wide" type="submit"><span id="auth-submit-label">Log in</span><i data-lucide="arrow-right"></i></button>
+                </form>
+                <p class="privacy-note"><i data-lucide="shield-check"></i> Your account stays yours. Always.</p>
+            </div>
+            <footer class="auth-footer">
+                <span>A thoughtful place to show up as yourself.</span>
+                <nav aria-label="Policies">
+                    <button type="button" data-info="privacy">Privacy</button>
+                    <button type="button" data-info="terms">Terms</button>
+                    <button type="button" data-info="community">Community</button>
+                </nav>
+            </footer>
+        </section>
+    </main>
+
+    <div id="app-shell" class="app-shell" hidden>
+        <aside class="sidebar">
+            <a class="brand brand-dark sidebar-brand" href="#feed" aria-label="Social Alpha feed">
+                <span class="brand-mark"><i data-lucide="orbit"></i></span>
+                <span>social<span class="brand-light">alpha</span></span>
+            </a>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <button class="nav-link is-active" type="button" data-view="feed" aria-label="Home" title="Home"><i data-lucide="house"></i><span>Home</span></button>
+                <button class="nav-link" type="button" data-view="following" aria-label="Following" title="Following"><i data-lucide="users-round"></i><span>Following</span></button>
+                <button class="nav-link" type="button" data-view="profile" aria-label="My profile" title="My profile"><i data-lucide="user-round"></i><span>My profile</span></button>
+            </nav>
+            <div class="sidebar-note"><span class="note-mark">✳</span><p>Make your feed feel like <strong>you.</strong></p></div>
+            <button class="account-chip" id="account-chip" type="button" data-view="profile">
+                <span class="avatar avatar-small" id="sidebar-avatar"></span>
+                <span class="account-copy"><strong id="sidebar-username"></strong><small>View your profile</small></span>
+                <i data-lucide="chevron-right"></i>
+            </button>
+        </aside>
+
+        <main class="main-column">
+            <header class="topbar">
+                <div class="topbar-title"><span class="eyebrow">SOCIAL ALPHA</span><h1 id="page-title">Make your circle count.</h1></div>
+                <div class="topbar-actions">
+                    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" title="Switch to light mode"><i class="theme-icon theme-icon-sun" data-lucide="sun"></i><i class="theme-icon theme-icon-moon" data-lucide="moon"></i></button>
+                    <div class="search-wrap topbar-search">
+                        <label class="search-box" for="feed-search"><i data-lucide="search"></i><input id="feed-search" type="search" placeholder="Find people by name" autocomplete="off" aria-controls="search-results" aria-expanded="false"></label>
+                        <div id="search-results" class="search-results" role="listbox" aria-label="People search results" hidden></div>
+                    </div>
+                    <button class="icon-button logout-button" id="logout-button" type="button" aria-label="Log out" title="Log out"><i data-lucide="log-out"></i></button>
+                </div>
+            </header>
+
+            <section id="feed-view" class="view-panel">
+                <form id="post-form" class="composer">
+                    <span class="avatar" id="composer-avatar"></span>
+                    <div class="composer-body">
+                        <label class="sr-only" for="post-content">Share something with your circle</label>
+                        <textarea id="post-content" maxlength="500" rows="3" placeholder="What’s on your mind?" required></textarea>
+                        <div class="composer-footer"><span id="post-count">0 / 500</span><button class="button button-primary" type="submit"><i data-lucide="send"></i> Share post</button></div>
+                    </div>
+                </form>
+                <aside class="quote-card" aria-label="A thought for today">
+                    <span class="quote-symbol" aria-hidden="true">“</span>
+                    <div class="quote-copy"><span class="eyebrow">A THOUGHT FOR TODAY</span><p id="daily-quote"></p></div>
+                    <button id="new-quote" class="icon-button quote-refresh" type="button" aria-label="Show another quote" title="Show another quote"><i data-lucide="shuffle"></i></button>
+                </aside>
+                <div class="feed-heading">
+                    <div><span class="eyebrow">THE LATEST</span><h2>Good conversations start here.</h2></div>
+                    <div class="feed-switch" role="tablist" aria-label="Feed filter">
+                        <button class="feed-tab is-active" type="button" data-scope="all" role="tab" aria-selected="true">For you</button>
+                        <button class="feed-tab" type="button" data-scope="following" role="tab" aria-selected="false">Following</button>
+                    </div>
+                </div>
+                <div id="feed-list" class="feed-list" aria-live="polite"></div>
+            </section>
+
+            <section id="profile-view" class="view-panel profile-view" hidden>
+                <div class="profile-banner"><span>YOUR SPACE, YOUR STORY</span></div>
+                <div class="profile-summary">
+                    <span class="avatar avatar-profile" id="profile-avatar"></span>
+                    <div class="profile-actions" id="profile-actions"></div>
+                    <h2 id="profile-name"></h2>
+                    <p class="profile-handle" id="profile-handle"></p>
+                    <p class="profile-bio" id="profile-bio"></p>
+                    <div class="profile-stats"><span><strong id="profile-followers">0</strong> followers</span><span><strong id="profile-following">0</strong> following</span></div>
+                </div>
+                <form id="bio-form" class="bio-form" hidden>
+                    <label for="bio-input">A few words about you</label>
+                    <textarea id="bio-input" maxlength="160" rows="3"></textarea>
+                    <div class="bio-form-footer"><span id="bio-count">0 / 160</span><button class="button button-primary" type="submit">Save bio</button></div>
+                </form>
+                <div class="profile-post-heading"><span class="eyebrow">ON THE RECORD</span><h3>Posts</h3></div>
+                <div id="profile-posts" class="feed-list"></div>
+            </section>
+        </main>
+
+        <aside class="right-rail">
+            <section class="rail-section suggestions-section">
+                <div class="rail-heading"><div><span class="eyebrow">GOOD COMPANY</span><h2>People to meet</h2></div><i data-lucide="sparkles"></i></div>
+                <div id="suggestion-list" class="suggestion-list"></div>
+            </section>
+            <section class="rail-note"><span class="note-mark">✳</span><p>Small circles. <strong>Big ideas.</strong></p><span>Social Alpha · A place to belong</span></section>
+            <footer class="rail-footer">Built for people, not the scroll.</footer>
+        </aside>
+        <footer class="app-footer">
+            <span>Social Alpha · A thoughtful place to show up.</span>
+            <nav aria-label="Support and policies">
+                <button type="button" data-info="support">Support</button>
+                <button type="button" data-info="privacy">Privacy</button>
+                <button type="button" data-info="terms">Terms</button>
+                <button type="button" data-info="community">Community</button>
+            </nav>
+        </footer>
+    </div>
+    <dialog id="info-dialog" class="info-dialog" aria-labelledby="dialog-title">
+        <div class="dialog-heading"><div><span id="dialog-eyebrow" class="eyebrow"></span><h2 id="dialog-title"></h2></div><button id="dialog-close" class="icon-button" type="button" aria-label="Close"><i data-lucide="x"></i></button></div>
+        <div id="dialog-body" class="dialog-body"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
